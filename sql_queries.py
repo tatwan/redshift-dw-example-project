@@ -154,8 +154,8 @@ copy staging_area.staging_events_table
 from '{}'
 credentials 'aws_iam_role={}'
 region '{}'
-format as json 'auto ignorecase';
-""").format(config.get('S3', 'LOG_DATA'), config.get('IAM_ROLE', 'ARN'), config.get('CLUSTER', 'REGION'))
+json '{}';
+""").format(config.get('S3', 'LOG_DATA'), config.get('IAM_ROLE', 'ARN'), config.get('CLUSTER', 'REGION'), config.get('S3', 'LOG_JSONPATH'))
 
 staging_songs_copy = ("""
 copy staging_area.staging_songs_table 
