@@ -1,12 +1,14 @@
-# Project: RedShift Data Warehouse
+# Project: RedShift Data Warehouse 
+
+# Scenario: Sparkify Streaming Music App
+
+> Note: If you are interested in Data Lakes, we will be using the same data set but instead of a Data Warehouse, we will build a Data Lake on S3, using Spark for ETL. We will leverage AWS EMR. You can check it out [here](https://github.com/tatwan/emr-pyspark)
 
 ### Introduction
 
 This project assumes a scenario for a music streaming startup, Sparkify, which has grown their user base and song database and want to move their processes and data onto the cloud. Their data resides in S3, in a directory of many JSON logs on user activity on the app, as well as a directory with many JSON metadata on the songs in their app.
 
-As a data engineer, we are tasked with building an ETL pipeline that extracts their data from S3, stages them in Redshift, and transforms data into a set of dimensional tables for their analytics team to continue finding insights in what songs their users are listening to. We will test our database and ETL pipeline by running queries given to you by the analytics team from Sparkify and compare your results with their expected results.
-
-
+As data engineers, we are tasked with building an ETL pipeline that extracts their data from S3, stages them in Redshift, and transforms data into a set of dimensional tables for their analytics team to continue finding insights in what songs their users are listening to. We will test our database and ETL pipeline by running queries given to us by the analytics team from Sparkify and compare our results with their expected results.
 
 Below is the Dimensional Model for the Sparkify data warehouse.
 
@@ -14,7 +16,7 @@ Below is the Dimensional Model for the Sparkify data warehouse.
 
 ![img](images/erd_aws.png)
 
-Below is the overall Cloud Architecture
+Below is the overall AWS Cloud Architecture.
 
 ![img](images/awsdw-2.png)
 
@@ -24,15 +26,15 @@ Below is the overall Cloud Architecture
 2. Use Python to perform Data Exploration on the JSON files.
    1. Use Pandas to read and load all the files into DataFrames to perform EDA.
    2. Understand data types, sizes and overall content to gain further understanding on the data quality, data content and what strategy needs to be implemented to build the Data Warehouse.
-3. Create a Staging Schema to extract data from all the log files and metadata files into a Redshift schema. The staging area has two tables:
-   1. staging_events_table
-   2. staging_songs_table
-4. Create the DW Dimensional Model (Fact and Dimension Tables)
-   1. 1 Fact and 4 Dimension tables based on requirements 
+3. Create a **Staging** Schema to extract data from all the log files and metadata files into a Redshift schema. The staging area has two tables:
+   1. `staging_events_table`
+   2. `staging_songs_table`
+4. Create the DW Dimensional Model DDL (Fact and Dimension Tables)
+   1. **1 Fact and 4 Dimension** tables based on requirements 
 5. Query optimization
    1. Leverage Redshift optimization best practices
       1. Create all proper constraints (PK and FK)
-      2. Implement distribution strategy: example using `ALL` strategy for smaller tables, and partition by `key` for larger tables via `DISTTYLE` and `DISTKEY`
+      2. Implement **distribution strategy:** example using `ALL` strategy for smaller tables, and partition by `key` for larger tables via `DISTTYLE` and `DISTKEY`
       3. Implementing sorting strategy for improved performance on commonly used columns for joining and filtering via `SORTKEY`
 6. Load the data 
    1. EL (Extract and Load) from Source (S3) to target staging area
@@ -63,6 +65,7 @@ Tables Created
 
 ```bash
 ❯ python etl.py
+
 Staging Tables Loading Started ...
 Loading Complete
 DW Tables Loading Started ...
